@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品列表</title>
+    <!-- jquery -->
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div>
+            <span class="glyphicon glyphicon-shopping-cart" style="margin-left: 50px; margin-right: 600px">
+                <a style="cursor:pointer; color: black; font-weight: bold; text-decoration: none" onclick="getOrderList()">我的订单</a>
+            </span>
+            <span class="glyphicon glyphicon-log-out" style="margin-left: 700px">
+                <a style="cursor:pointer; color: black; font-weight: bold; text-decoration: none" onclick="logout()">退出登录</a>
+            </span>
+        </div>
+        <p style="text-align:center; font-size:30px;">超值好物</p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4" th:each="goods,goodsStat : ${goodsList}">
+            <div class="thumbnail">
+                <img th:src="@{${goods.goodsImg}}" width=80% height="500"/>
+                <div class="caption">
+                    <s th:text="${goods.goodsPrice} + '元'"></s>
+                    <h3 th:text="${goods.seckillPrice} + '元'"></h3>
+                    <h2 th:text="${goods.goodsName}"></h2>
+                    <p th:text="'还剩' + ${goods.stockCount} + '件'"></p>
+                    <p>
+                        <a th:href="'/goodsDetail.htm?goodsId=' + ${goods.id}" class="btn btn-primary" role="button">立即抢购</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function getOrderList() {
+        window.location.href = "/order/orderList";
+    }
+
+    function logout(){
+        window.location.href = "/login/toLogin";
+    }
+</script>
+</html>

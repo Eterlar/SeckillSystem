@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>订单列表</title>
+  <!-- jquery -->
+  <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+  <script src="/js/jquery.min.js"></script>
+  <!-- bootstrap -->
+  <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+  <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+  <!-- layer -->
+  <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+  <!-- common.js -->
+  <script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+<body>
+<div class="panel panel-default">
+  <div class="panel-heading">我的订单</div>
+  <table class="table" id="orderList">
+    <tr>
+      <td>商品名称</td>
+      <td>购买价格</td>
+      <td>状态</td>
+      <td>详情</td>
+    </tr>
+    <tr th:each="order : ${orders}">
+      <td th:text="${order.goodsName}"></td>
+      <td th:text="${order.goodsPrice}"></td>
+      <div th:switch="${order.status}">
+        <td th:case="0">未支付</td>
+        <td th:case="1">已支付</td>
+        <td th:case="2">已发货</td>
+        <td th:case="3">已收货</td>
+        <td th:case="4">已退货</td>
+        <td th:case="5">已完成</td>
+      </div>
+      <td><a th:href="'/orderDetail.htm?orderId='+${order.id}">订单详情</a></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
